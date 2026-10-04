@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Dual Vision</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#07080b;--card:#11141a;--text:#f5f5f5;--muted:#9ca3af;--line:#252a33;--accent:#fff}
+body{margin:0;background:radial-gradient(circle at top,#1b2029,#07080b 42%);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
+.app{max-width:500px;margin:auto;min-height:100vh;padding-bottom:82px}
+header{padding:22px 18px 12px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-size:24px;font-weight:900;letter-spacing:1px}.brand span{color:#aaa}
+.icon{background:#171a20;border:1px solid var(--line);color:white;border-radius:12px;padding:9px 11px}
+main{padding:0 16px}
+.page{display:none}.page.active{display:block}
+h1{font-size:28px;margin:15px 0 6px}.sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px}
+.section-title h2{font-size:18px;margin:0}.see{font-size:12px;color:#aaa}
+.card{background:linear-gradient(145deg,#151820,#0d0f14);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 12px 30px #0005}
+.hero{height:155px;display:flex;align-items:end;justify-content:space-between;background:linear-gradient(135deg,#252b36,#0e1015);overflow:hidden}
+.hero .phone{font-size:70px}.tag{font-size:11px;padding:6px 9px;border-radius:20px;background:#fff;color:#000;display:inline-block;font-weight:bold}
+.row{display:flex;gap:10px;overflow:auto}.mini{min-width:145px}.mini h3{font-size:14px;margin:10px 0 4px}.mini p,.card p{color:var(--muted);font-size:12px;margin:4px 0}
+.compare{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;text-align:center}.compare .device{font-size:45px}.vs{font-weight:900;font-size:13px}
+.btn{border:0;border-radius:13px;padding:11px 15px;background:white;color:#090909;font-weight:700;cursor:pointer}.btn.dark{background:#1b1f27;color:white;border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid .card{margin:0}
+.search{width:100%;padding:14px 16px;border-radius:15px;border:1px solid var(--line);background:#11141a;color:white;outline:none;font-size:14px}
+.phone-img{font-size:72px;text-align:center;padding:8px}.spec{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:12px 0;font-size:13px}.spec:last-child{border:0}.spec span:last-child{color:#bbb;text-align:right}
+.profile{text-align:center;padding:22px}.avatar{width:82px;height:82px;border-radius:50%;margin:auto;background:linear-gradient(135deg,#fff,#777);color:#080808;display:grid;place-items:center;font-size:30px;font-weight:900}
+.setting{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--line);font-size:14px}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(500px,100%);height:68px;background:#0c0e13eF;backdrop-filter:blur(18px);border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;z-index:5}
+nav button{background:none;border:0;color:#777;font-size:11px;display:flex;flex-direction:column;gap:4px;align-items:center;cursor:pointer}nav button.active{color:white}nav b{font-size:20px}
+.empty{color:#777;text-align:center;padding:25px}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand">DUAL <span>VISION</span></div><button class="icon" onclick="show('settings')">⚙</button></header>
+<main>
+
+<section id="home" class="page active">
+<h1>Discover.</h1><div class="sub">Compare the tech that matters.</div>
+<div class="card hero"><div><span class="tag">TRENDING</span><h2>Phone Battles</h2><p>See which device wins.</p></div><div class="phone">📱</div></div>
+<div class="section-title"><h2>Trending Comparisons</h2><span class="see">View all</span></div>
+<div class="card compare"><div><div class="device">📱</div><b>iPhone</b><p>Pro series</p></div><div class="vs">VS</div><div><div class="device">📱</div><b>Galaxy</b><p>S series</p></div></div>
+<div class="section-title"><h2>Latest Phones</h2></div>
+<div class="row">
+<div class="card mini"><div class="phone-img">📱</div><h3>iPhone 17 Pro</h3><p>Flagship • Pro</p></div>
+<div class="card mini"><div class="phone-img">📱</div><h3>Pixel Pro</h3><p>Camera • AI</p></div>
+<div class="card mini"><div class="phone-img">📱</div><h3>Galaxy Ultra</h3><p>Premium • Android</p></div>
+</div>
+<div class="section-title"><h2>Featured Products</h2></div>
+<div class="grid"><div class="card"><b>💻 Laptops</b><p>Top picks</p></div><div class="card"><b>⌚ Watches</b><p>Trending now</p></div><div class="card"><b>🎧 Earbuds</b><p>Best audio</p></div><div class="card"><b>📱 Tablets</b><p>Big screen</p></div></div>
+</section>
+
+<section id="compare" class="page">
+<h1>Comparisons</h1><div class="sub">Choose a category.</div>
+<div class="grid">
+<div class="card" onclick="compare('Phone')"><div class="phone-img">📱</div><b>Phone vs Phone</b><p>Compare smartphones</p></div>
+<div class="card"><div class="phone-img">💻</div><b>Laptop vs Laptop</b><p>Compare laptops</p></div>
+<div class="card"><div class="phone-img">📲</div><b>Tablet vs Tablet</b><p>Compare tablets</p></div>
+<div class="card"><div class="phone-img">⌚</div><b>Watch vs Watch</b><p>Compare watches</p></div>
+<div class="card"><div class="phone-img">🎧</div><b>Earbuds vs Earbuds</b><p>Compare audio</p></div>
+</div>
+<div id="compareBox" class="card" style="margin-top:16px"><b>Quick comparison</b><p>Select a category to start.</p></div>
+</section>
+
+<section id="search" class="page">
+<h1>Search</h1><div class="sub">Find phones and products.</div>
+<input id="searchInput" class="search" placeholder="Search iPhone, Galaxy, Pixel..." oninput="searchProducts()">
+<div id="results" style="margin-top:16px"></div>
+</section>
+
+<section id="profile" class="page">
+<div class="card profile"><div class="avatar">DV</div><h2>Dual Vision User</h2><p>Tech explorer</p><button class="btn">Edit Profile</button></div>
+<div class="section-title"><h2>Saved Comparisons</h2></div><div class="card"><b>📱 iPhone vs Galaxy</b><p>Saved comparison</p></div>
+<div class="section-title"><h2>Favorites</h2></div><div class="card"><b>♡ Your favorite products</b><p>Nothing saved yet.</p></div>
+</section>
+
+<section id="phones" class="page">
+<h1>Phone Information</h1><div class="sub">Explore detailed smartphone specs.</div>
+<div class="card">
+<div class="phone-img">📱</div><h2>iPhone 17 Pro</h2><p>Premium smartphone</p>
+<div class="spec"><span>Price</span><span>$1,099+</span></div>
+<div class="spec"><span>Display</span><span>OLED • ProMotion</span></div>
+<div class="spec"><span>Processor</span><span>A-series chip</span></div>
+<div class="spec"><span>RAM / Storage</span><span>12GB / 256GB+</span></div>
+<div class="spec"><span>Camera</span><span>Pro camera system</span></div>
+<div class="spec"><span>Battery</span><span>All-day class</span></div>
+<div class="spec"><span>Pros</span><span>Performance, camera</span></div>
+<div class="spec"><span>Cons</span><span>Premium price</span></div>
+</div>
+</section>
+
+<section id="settings" class="page">
+<h1>Settings</h1><div class="sub">Customize Dual Vision.</div>
+<div class="card">
+<div class="setting"><span>🌙 Dark / Light Mode</span><button class="btn dark" onclick="toggleTheme()">Toggle</button></div>
+<div class="setting"><span>🔔 Notifications</span><button class="btn dark" onclick="alert('Notifications setting opened')">Manage</button></div>
+<div class="setting"><span>🚪 Logout</span><button class="btn dark" onclick="alert('Logged out')">Logout</button></div>
+</div>
+</section>
+
+</main>
+<nav>
+<button class="active" onclick="show('home',this)"><b>⌂</b>Home</button>
+<button onclick="show('compare',this)"><b>⚔</b>Compare</button>
+<button onclick="show('search',this)"><b>⌕</b>Search</button>
+<button onclick="show('phones',this)"><b>▣</b>Phones</button>
+<button onclick="show('profile',this)"><b>●</b>Profile</button>
+</nav>
+</div>
+
+<script>
+const products=[
+["iPhone 17 Pro","📱","Pro smartphone"],
+["Galaxy Ultra","📱","Premium Android"],
+["Pixel Pro","📱","AI & camera"],
+["OnePlus","📱","Performance phone"],
+["MacBook","💻","Premium laptop"],
+["Galaxy Watch","⌚","Smartwatch"],
+["AirPods","🎧","Wireless earbuds"]
+];
+
+function show(id,btn){
+ document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ if(btn){document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}
+ window.scrollTo(0,0);
+}
+function searchProducts(){
+ const q=document.getElementById('searchInput').value.toLowerCase();
+ const box=document.getElementById('results');
+ const found=products.filter(p=>p[0].toLowerCase().includes(q));
+ box.innerHTML=q && found.length?found.map(p=>`<div class="card"><div style="font-size:40px">${p[1]}</div><b>${p[0]}</b><p>${p[2]}</p></div>`).join(''):'<div class="empty">Type a product name to search.</div>';
+}
+function compare(type){
+ document.getElementById('compareBox').innerHTML='<b>Phone comparison</b><p>Choose two phones to compare their display, processor, camera, battery, price and more.</p><button class="btn" onclick="show(\'phones\')">View Phone Info</button>';
+}
+function toggleTheme(){
+ document.body.style.background='radial-gradient(circle at top,#30343d,#f0f0f0 70%)';
+ document.body.style.color='#111';
+ alert('Light mode preview enabled. Reload to restore.');
+}
+</script>
+</body>
+</html>
